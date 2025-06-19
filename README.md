@@ -1,8 +1,53 @@
+## How to run in development mode
+
+```bash
+npm start
+```
+
+
+## How to create the writable EXE
+
+```bash
+npm run make:writable
+```
+
+The single EXE file will be at directory ./dist-writable/make.
+The builder* files in there can be ignored
+
+You might want to copy ./industry.db to the above directory for some test data
+
+
+## How to create the readonly EXE
+
+```bash
+npm run make:readonly
+```
+
+The single EXE file will be at directory ./dist-writable/make.
+The builder* files in there can be ignored
+
+You might want to copy ./industry.db to the above directory for some test data
+
+
+## SQLite database schema
+
+See ./resources/data/industry.sql
+
+
+## Categories JSON file
+
+See ./resources/data/categories.json
+
+
+> The following are legacy content from the template which this web app was based on
+
+
 # electron-shadcn
 
 Electron in all its glory. Everything you will need to develop your beautiful desktop application.
 
 ![Demo GIF](https://github.com/LuanRoger/electron-shadcn/blob/main/images/demo.gif)
+
 
 ## Libs and tools
 
@@ -149,7 +194,7 @@ npm run start
 - [Wordle Game](https://github.com/masonyekta/wordle-game) - A Wordle game which features interactive gameplay, cross-platform compatibility, and integration with a custom Wordle API for word validation and letter correctness.
 - [Mehr 🌟](https://github.com/xmannii/MehrLocalChat) - A modern, elegant local AI chatbot application using Electron, React, shadcn/ui, and Ollama.
 
-> Does you've used this template in your project? Add it here and open a PR.
+> Have you used this template in your project? Add it here and open a PR.
 
 ## License
 
