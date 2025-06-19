@@ -46,7 +46,9 @@ sqlite3.exe industry.db < ./test_data.sql
 See ./resources/data/categories.json
 
 
+***
 > The following are legacy content from the template which this web app was based on
+***
 
 
 # electron-shadcn
