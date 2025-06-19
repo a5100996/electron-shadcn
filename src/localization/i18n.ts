@@ -1,142 +1,28 @@
-import i18n from "i18next";
-import { initReactI18next } from "react-i18next";
+import i18n from "i18next"
+import { initReactI18next } from "react-i18next"
+import translations from "./i18n.json"
+
+const inDevelopment = process.env.NODE_ENV === "development"
+let fallbackLng = "zh-Hant"
+let resources = {
+    "zh-Hans": {
+        translation: translations["zh-Hans"]
+    },
+    "zh-Hant": {
+        translation: translations["zh-Hant"]
+    },
+}
+if (inDevelopment) {
+    fallbackLng = "en"
+    resources = {
+        ...resources,
+        [fallbackLng]: {
+            translation: translations[fallbackLng]
+        }
+    }
+}
 
 i18n.use(initReactI18next).init({
-    fallbackLng: "en",
-    resources: {       
-        "zh-Hans": {
-                translation: {
-                appName: "示例浏览器",
-                titleHomePage: "主页",
-                titleSecondPage: "第二页",
-
-                sampleManagement: "样品管理",
-                language: "语系",
-                add_sample: "新增样品",
-                productNo: "产品编号",
-                drawingNo: "图纸号",
-                pickDate: "选择日期",
-                moldOpeningDate: "开样品模日期",
-                massProductionDate: "开大货模日期",
-                sampleConfirmationDate: "样品确认日期",
-                search: "搜索",
-                clearAllSearchConditions: "清空所有搜寻条件",
-                page: "页",
-                total_n_records: "共{{record_count}}笔",
-                picture: "图片",
-                unitPrice: "单价",
-                material: "材料",
-                check: "查看",
-                hide: "躲",
-                view: "检视",
-                edit: "编辑",
-                delete: "删除",
-                deleteSample: "删除样本",
-                noSample: "无样本",
-
-                product_name: "品名",
-                color: "色号",
-                opening_confirmation_date: "开样确认日",
-                remark: "备注",
-
-                addSample: "添加示例",
-                editSample: "编辑样本",
-                addEditSample: "新增 / 更新样品",
-                viewSample: "查看示例",
-                back: "后退",
-                dimensionCheck: "尺寸测量",
-                strengthTest: "强度测试",
-                moldReleaseDate: "开大货模日期",
-                save: "储存",
-                category: "分类",
-                sampleDate: "开样确认日期",
-                //picture: "图片",
-                list: "清单",
-                please_fill_in_the_mandatory_fields: "请填写必填字段",
-                record_saved: "记录保存成功",
-
-                expand_details: "展开详细内容",
-                hide_details: "隐藏详细信息",
-                addEditItemCode: "新增/编辑item code",
-                addItemCode: "新增 item code",
-                editItemCode: "编辑 item code",
-                deleteItemCode: "删除 item code",
-                noItemCode: "不 item code",
-                areYouSure: "你确定吗？",
-                pasteFromClipboard: "从剪贴板粘贴",
-
-                unable_to_fetch_sample: "无法获取样本",
-                unable_to_fetch_item_codes: "无法获取商品代码",
-                previous: "以前的",
-                next: "比鄰",
-           },
-        },
-        "zh-Hant": {
-            translation: {
-                appName: "範例瀏覽器",
-                titleHomePage: "首頁",
-                titleSecondPage: "第二頁",
-
-                sampleManagement: "樣品管理",
-                language: "語系",
-                add_sample: "新增樣品",
-                productNo: "產品編號",
-                drawingNo: "圖紙號",
-                pickDate: "選擇日期",
-                moldOpeningDate: "開樣品模日期",
-                massProductionDate: "開大貨模日期",
-                sampleConfirmationDate: "樣品確認日期",
-                search: "搜尋",
-                clearAllSearchConditions: "清空所有搜尋條件",
-                page: "頁",
-                total_n_records: "共{{record_count}}筆",
-                picture: "圖片",
-                unitPrice: "單價",
-                material: "材料",
-                check: "查看",
-                hide: "背",
-                view: "檢視",
-                edit: "編輯",
-                delete: "刪除",
-                deleteSample: "刪除樣本",
-                noSample: "無樣本",
-
-                product_name: "品名",
-                color: "色號",
-                opening_confirmation_date: "開樣確認日",
-                remark: "備註",
-
-                addSample: "新增範例",
-                editSample: "編輯樣本",
-                addEditSample: "新增 / 更新樣品",
-                viewSample: "查看範例",
-                back: "後退",
-                dimensionCheck: "尺寸測量",
-                strengthTest: "強度測試",
-                moldReleaseDate: "開大貨模日期",
-                save: "儲存",
-                category: "分類",
-                sampleDate: "開樣確認日期",
-                //picture: "圖片",
-                list: "清單",
-                please_fill_in_the_mandatory_fields: "請填寫必填字段",
-                record_saved: "記錄保存成功",
-
-                expand_details: "展開詳細內容",
-                hide_details: "隱藏詳細訊息",
-                addEditItemCode: "新增/編輯item code",
-                addItemCode: "新增 item code",
-                editItemCode: "編輯 item code",
-                deleteItemCode: "刪除 item code",
-                noItemCode: "不 item code",
-                areYouSure: "你確定嗎？",
-                pasteFromClipboard: "從剪貼簿貼上",
-
-                unable_to_fetch_sample: "無法取得樣本",
-                unable_to_fetch_item_codes: "無法取得商品代碼",
-                previous: "以前的",
-                next: "比鄰",
-            },
-        },
-    },
-});
+    fallbackLng: fallbackLng,
+    resources: resources
+})

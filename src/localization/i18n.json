@@ -84,15 +84,15 @@
     "edit": "編輯",
     "delete": "刪除",
     "deleteSample": "刪除樣品",
-    "noSample": "無樣本",
+    "noSample": "無樣品",
     "product_name": "品名",
     "color": "色號",
     "opening_confirmation_date": "開樣確認日",
     "remark": "備註",
-    "addSample": "新增範例",
-    "editSample": "編輯樣本",
+    "addSample": "新增樣品",
+    "editSample": "編輯樣品",
     "addEditSample": "新增 / 更新樣品",
-    "viewSample": "查看範例",
+    "viewSample": "查看樣品",
     "back": "後退",
     "dimensionCheck": "尺寸測量",
     "strengthTest": "強度測試",
@@ -116,5 +116,5 @@
     "unable_to_fetch_item_codes": "無法取得item_codes",
     "previous": "上一頁",
     "next": "下一頁"
-  }
+  }  
 }

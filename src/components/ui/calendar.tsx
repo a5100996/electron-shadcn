@@ -41,6 +41,9 @@ function Calendar({
     "七月", "八月", "九月", "十月", "十一月", "十二月"
   ]
 
+  // 中文星期顯示
+  const weekdays = ["日", "一", "二", "三", "四", "五", "六"]
+
   return (
     <DayPicker
     month={month}
@@ -89,6 +92,11 @@ function Calendar({
           "aria-selected:bg-accent aria-selected:text-accent-foreground",
         day_hidden: "invisible",
         ...classNames,
+      }}
+      formatters={{
+        formatWeekdayName: (date) => {
+          return weekdays[date.getDay()]
+        }
       }}
       components={{
         IconLeft: ({ className, ...props }) => (
