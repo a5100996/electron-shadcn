@@ -33,6 +33,12 @@ You might want to copy ./industry.db to the above directory for some test data
 
 See ./resources/data/industry.sql
 
+To populate ./industry.db based on say, ./test_data.sql, download [sqlite](https://www.sqlite.org/download.html), put it in this directory and run:
+
+```bash
+sqlite3.exe industry.db < ./test_data.sql
+```
+
 
 ## Categories JSON file
 
