@@ -72,8 +72,10 @@ function createWindow(url = "") {
     const currentWindow = BrowserWindow.getFocusedWindow()
     if (currentWindow) {
         const [currentWindowX, currentWindowY] = currentWindow.getPosition()
-        x = currentWindowX + 24
-        y = currentWindowY + 24
+        //x = currentWindowX + 24
+        x = currentWindowX
+        //y = currentWindowY + 24
+        y = currentWindowY
     }
 
     let options = {

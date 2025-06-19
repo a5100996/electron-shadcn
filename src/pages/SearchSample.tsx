@@ -724,7 +724,7 @@ export default function SearchSample() {
                 <div className="flex flex-1 flex-row justify-between">
                     <h1 className="text-4xl font-bold">{t("sampleManagement")}</h1>
                     {/* grid grid-flow-col grid-rows-3  */}
-                    <div className="flex flex-col gap-y-3 justify-items-start">
+                    <div className="flex flex-col gap-y-6 justify-items-start">
                         <div>
 
                             <div>{t("language")}</div>
@@ -761,7 +761,7 @@ export default function SearchSample() {
                     {(writable == true) &&
                         <div className="text-right">
                             <Button
-                                className="bg-green-600 mr-2"
+                                className="bg-green-600 mr-1 mb-1"
                                 onClick={(e) => {
                                     e.stopPropagation()
                                     //const url = "/add-edit-sample""
@@ -783,7 +783,8 @@ export default function SearchSample() {
                         <Label>{t("category")}</Label>
                         <Select value={category || ""} onValueChange={(e) => setCategory(e)}>
                             <SelectTrigger className="w-full">
-                                <SelectValue placeholder={t("category")} />
+                                {/* <SelectValue placeholder={t("category")} /> */}
+                                <SelectValue />
                             </SelectTrigger>
                             <SelectContent>
                                 <SelectGroup>

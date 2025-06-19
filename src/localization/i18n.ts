@@ -12,15 +12,15 @@ let resources = {
         translation: translations["zh-Hant"]
     },
 }
-if (inDevelopment) {
-    fallbackLng = "en"
-    resources = {
-        ...resources,
-        [fallbackLng]: {
-            translation: translations[fallbackLng]
-        }
-    }
-}
+// if (inDevelopment) {
+//     fallbackLng = "zh-Hant"
+//     resources = {
+//         ...resources,
+//         [fallbackLng]: {
+//             translation: translations[fallbackLng]
+//         }
+//     }
+// }
 
 i18n.use(initReactI18next).init({
     fallbackLng: fallbackLng,

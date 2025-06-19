@@ -13,15 +13,15 @@ let available_languages = [
         prefix: "HANT",
     },
 ]
-if (inDevelopment) {
-    available_languages = [
-        ...available_languages,
-        {
-            key: "en",
-            nativeName: "English",
-            prefix: "🇺🇸",
-        },
-    ]
-}
+// if (inDevelopment) {
+//     available_languages = [
+//         ...available_languages,
+//         {
+//             key: "zh-Hant",
+//             nativeName: "Chinese (Traditional)",
+//             prefix: "HANT",
+//         },
+//     ]
+// }
 
 export default available_languages satisfies Language[]
