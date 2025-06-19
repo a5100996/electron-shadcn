@@ -1,4 +1,4 @@
-﻿import React from "react"
+import React from "react"
 import { useNavigate, useLocation, useParams, useRouter } from "@tanstack/react-router"
 import {
     Accordion,
@@ -52,7 +52,7 @@ import { resizeImage } from "@/utils/resize_image";
 import { cn } from "@/utils/misc"
 import { useTranslation } from "react-i18next"
 import { setAppLanguage } from "@/helpers/language_helpers"
-import { Asterisk, ArrowLeft, CalendarIcon, Copy, FileImage, Plus } from "lucide-react"
+import { Asterisk, ArrowLeft, CalendarIcon, CircleX, Copy, FileImage, Plus } from "lucide-react"
 export default function AddEditViewSample() {
     const { t, i18n } = useTranslation()
 
@@ -894,7 +894,6 @@ export default function AddEditViewSample() {
                                             type="text"
                                             id="name"
                                             value={itemCodeName}
-                                            placeholder={t("product_name")}
                                             onChange={(e) => setItemCodeName(e.target.value)}
                                         />
                                     </div>
@@ -905,19 +904,18 @@ export default function AddEditViewSample() {
                                             type="text"
                                             id="color_code"
                                             value={itemCodeColorCode}
-                                            placeholder={t("color")}
                                             onChange={(e) => setItemCodeColorCode(e.target.value)}
                                         />
                                     </div>
 
-                                    <div className="flex flex-col gap-2">
+                                    <div className="relative flex flex-col gap-2">
                                         <Label>{t("opening_confirmation_date")}</Label>
                                         <Popover modal={true}>
                                             <PopoverTrigger asChild>
                                                 <Button
                                                     variant={"outline"}
                                                     className={cn(
-                                                        "w-[240px] justify-start text-left font-normal",
+                                                        "w-full justify-start text-left font-normal",
                                                         !itemCodeConfirmationDate && "text-muted-foreground"
                                                     )}
                                                 >
@@ -934,6 +932,9 @@ export default function AddEditViewSample() {
                                                 />
                                             </PopoverContent>
                                         </Popover>
+                                        <div className="absolute right-3 top-4/5 transform -translate-y-4/5">
+                                            <CircleX className="text-gray-300 cursor-pointer" size={18} onClick={() => setItemCodeConfirmationDate(null)} />
+                                        </div>
                                     </div>
 
                                     <div className="col-span-2 flex flex-col gap-2 w-full">
@@ -941,7 +942,6 @@ export default function AddEditViewSample() {
                                         <Textarea
                                             id="remark"
                                             value={itemCodeRemark}
-                                            placeholder={t("remark")}
                                             onChange={(e) => setItemCodeRemark(e.target.value)}
                                         />
                                     </div>
@@ -975,7 +975,6 @@ export default function AddEditViewSample() {
                     <Input
                         type="text"
                         id="productNo"
-                        placeholder={t("productNo")}
                         value={productNo}
                         onChange={(e) => setProductNo(e.target.value)}
                     />
@@ -992,7 +991,8 @@ export default function AddEditViewSample() {
                     value={category || ""}
                     onValueChange={(e) => setCategory(e)}>
                     <SelectTrigger className="w-full">
-                        <SelectValue placeholder={t("category")} />
+                        {/* <SelectValue placeholder={t("category")} /> */}
+                        <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
                         <SelectGroup>
@@ -1019,7 +1019,6 @@ export default function AddEditViewSample() {
                     <Input
                         type="text"
                         id="unitPrice"
-                        placeholder={t("unitPrice")}
                         value={unitPrice}
                         onChange={(e) => setUnitPrice(e.target.value)}
                     />
@@ -1034,7 +1033,6 @@ export default function AddEditViewSample() {
                     <Input
                         type="text"
                         id="drawingNo"
-                        placeholder={t("drawingNo")}
                         value={drawingNo}
                         onChange={(e) => setDrawingNo(e.target.value)}
                     />
@@ -1051,7 +1049,6 @@ export default function AddEditViewSample() {
                     <Input
                         type="text"
                         id="material"
-                        placeholder={t("material")}
                         value={material}
                         onChange={(e) => setMaterial(e.target.value)}
                     />
@@ -1066,7 +1063,6 @@ export default function AddEditViewSample() {
                     <Input
                         type="text"
                         id="dimensionCheck"
-                        placeholder={t("dimensionCheck")}
                         value={dimensionCheck}
                         onChange={(e) => setDimensionCheck(e.target.value)}
                     />
@@ -1080,27 +1076,32 @@ export default function AddEditViewSample() {
             <div className="flex flex-col w-full gap-2">
                 <Label className="text-lg" >{t("sampleDate")}</Label>
                 {writable ?
-                    <Popover>
-                        <PopoverTrigger asChild>
-                            <Button
-                                variant={"outline"}
-                                className={cn(
-                                    "w-[240px] justify-start text-left font-normal",
-                                    !sampleDate && "text-muted-foreground"
-                                )}
-                            >
-                                <CalendarIcon />
-                                {sampleDate ? format(sampleDate, "yyyy/MM/dd") : <span>{t("sampleDate")}</span>}
-                            </Button>
-                        </PopoverTrigger>
-                        <PopoverContent className="w-auto p-0" align="start">
-                            <Calendar
-                                mode="single"
-                                selected={sampleDate}
-                                onSelect={(e) => setSampleDate(e)}
-                            />{/* onSelect={setSampleDate} */}
-                        </PopoverContent>
-                    </Popover>
+                    <div className="relative">
+                        <Popover>
+                            <PopoverTrigger asChild>
+                                <Button
+                                    variant={"outline"}
+                                    className={cn(
+                                        "w-full justify-start text-left font-normal",
+                                        !sampleDate && "text-muted-foreground"
+                                    )}
+                                >
+                                    <CalendarIcon />
+                                    {sampleDate ? format(sampleDate, "yyyy/MM/dd") : <span>{t("sampleDate")}</span>}
+                                </Button>
+                            </PopoverTrigger>
+                            <PopoverContent className="w-auto p-0" align="start">
+                                <Calendar
+                                    mode="single"
+                                    selected={sampleDate}
+                                    onSelect={(e) => setSampleDate(e)}
+                                />{/* onSelect={setSampleDate} */}
+                            </PopoverContent>
+                        </Popover>
+                        <div className="absolute right-3 top-3/5 transform -translate-y-3/5">
+                            <CircleX className="text-gray-300 cursor-pointer" size={18} onClick={() => setSampleDate(null)} />
+                        </div>
+                    </div>
                     :
                     <div className="text-gray-600">{sampleDate ? format(sampleDate, "yyyy/MM/dd") : ""}</div>
                 }
@@ -1109,21 +1110,22 @@ export default function AddEditViewSample() {
             <div className="flex flex-col w-full gap-2">
                 <Label className="text-lg" >{t("moldReleaseDate")} </Label>
                 {writable ?
-                    <Popover>
-                        <PopoverTrigger asChild>
-                            <Button
-                                variant={"outline"}
-                                className={cn(
-                                    "w-[240px] justify-start text-left font-normal",
-                                    !moldReleaseDate && "text-muted-foreground"
-                                )}
-                            >
-                                <CalendarIcon />
-                                {moldReleaseDate ? format(moldReleaseDate, "yyyy/MM/dd") : <span>{t("moldReleaseDate")}</span>}
-                            </Button>
-                        </PopoverTrigger>
-                        <PopoverContent className="w-auto p-0" align="start">
-                            <Calendar
+                    <div className="relative">
+                        <Popover>
+                            <PopoverTrigger asChild>
+                                <Button
+                                    variant={"outline"}
+                                    className={cn(
+                                        "w-full justify-start text-left font-normal",
+                                        !moldReleaseDate && "text-muted-foreground"
+                                    )}
+                                >
+                                    <CalendarIcon />
+                                    {moldReleaseDate ? format(moldReleaseDate, "yyyy/MM/dd") : <span>{t("moldReleaseDate")}</span>}
+                                </Button>
+                            </PopoverTrigger>
+                            <PopoverContent className="w-auto p-0" align="start">
+                                <Calendar
                                     mode="single"
                                     selected={moldReleaseDate}
                                     onSelect={(e) => {
@@ -1131,9 +1133,13 @@ export default function AddEditViewSample() {
                                         //setMoldReleaseDate(e.value)
                                         setMoldReleaseDate(e)
                                     }}
-                            />{/* onSelect={setMoldReleaseDate} */}
-                        </PopoverContent>
-                    </Popover>
+                                />{/* onSelect={setMoldReleaseDate} */}
+                            </PopoverContent>
+                        </Popover>
+                        <div className="absolute right-3 top-3/5 transform -translate-y-3/5">
+                            <CircleX className="text-gray-300 cursor-pointer" size={18} onClick={() => setMoldReleaseDate(null)} />
+                        </div>
+                    </div>
                     :
                     <div className="text-gray-600">{moldReleaseDate ? format(moldReleaseDate, "yyyy/MM/dd") : ""}</div>
                 }
@@ -1147,7 +1153,6 @@ export default function AddEditViewSample() {
                     <Input
                         type="text"
                         id="strengthTest"
-                        placeholder={t("strengthTest")}
                         value={strengthTest}
                         onChange={(e) => setStrengthTest(e.target.value)}
                     />
@@ -1330,7 +1335,6 @@ export default function AddEditViewSample() {
                                                         <Input
                                                             type="text"
                                                             id="name"
-                                                            placeholder={t("product_name")}
                                                             value={itemCodeName}
                                                             onChange={(e) => setItemCodeName(e.target.value)}
                                                         />
@@ -1342,20 +1346,19 @@ export default function AddEditViewSample() {
                                                         <Input
                                                             type="text"
                                                             id="color_code"
-                                                            placeholder={t("color")}
                                                             value={itemCodeColorCode}
                                                             onChange={(e) => setItemCodeColorCode(e.target.value)}
                                                         />
                                                     </div>
 
-                                                    <div className="flex flex-col gap-2">
+                                                    <div className="relative flex flex-col gap-2 w-full">
                                                         <Label>{t("opening_confirmation_date")}</Label>
                                                         <Popover modal={true}>
                                                             <PopoverTrigger asChild>
                                                                 <Button
                                                                     variant={"outline"}
                                                                     className={cn(
-                                                                        "w-[240px] justify-start text-left font-normal",
+                                                                        "w-full justify-start text-left font-normal",
                                                                         !itemCodeConfirmationDate && "text-muted-foreground"
                                                                     )}
                                                                 >
@@ -1373,6 +1376,9 @@ export default function AddEditViewSample() {
                                                                 />
                                                             </PopoverContent>
                                                         </Popover>
+                                                        <div className="absolute right-3 top-4/5 transform -translate-y-4/5">
+                                                            <CircleX className="text-gray-300 cursor-pointer" size={18} onClick={() => setItemCodeConfirmationDate(null)} />
+                                                        </div>
                                                     </div>
 
                                                     <div className="col-span-2 flex flex-col gap-2 w-full">
@@ -1380,7 +1386,6 @@ export default function AddEditViewSample() {
                                                         {/* value={itemCode.REMARK} */}
                                                         <Textarea
                                                             id="remark"
-                                                            placeholder={t("remark")}
                                                             value={itemCodeRemark}
                                                             onChange={(e) => setItemCodeRemark(e.target.value)}
                                                         />
