@@ -82,8 +82,8 @@ export default function SearchSample() {
     const [orderBy, setOrderBy] = React.useState("PRODUCT_NO")
     const [orderAscDesc, setOrderAscDesc] = React.useState(1)
 
-    const [defaultExposedAccordionItems, setDefaultExposedAccordionItems] = React.useState([])
     const [expandedAccordionItems, setExpandedAccordionItems] = React.useState([])
+    const [cacheExpandedAccordionItems, setCacheExpandedAccordionItems] = React.useState([])
 
     //const { ipcRenderer } = window.require('electron')
 
@@ -213,11 +213,6 @@ export default function SearchSample() {
 
     // // trigger a search for samples
     React.useEffect(() => {
-
-        // // store already expanded accordion items
-        setDefaultExposedAccordionItems((oldValue) =>
-            expandedAccordionItems)
-
         search(new CustomEvent("search", {}))
     }, [triggerSearch])
 
@@ -226,7 +221,25 @@ export default function SearchSample() {
     // // 2) the array which tracks the clicked accordion items
     React.useEffect(() => {
         buildVisiblePageNumbers()
+
+        // // Clear list of expanded accordion items
         setExpandedAccordionItems((oldValue) => [])
+
+        console.log('++++++++++++++++++++++++++++++++++')
+        console.log('cacheExpandedAccordionItems = ', JSON.stringify(cacheExpandedAccordionItems))
+        console.log('++++++++++++++++++++++++++++++++++')
+
+        // // Open them one at a time, which refreshes their contents
+        if (cacheExpandedAccordionItems.length > 0) {
+            // // refresh the expanded items
+            let i = 1
+            for (let ceai of cacheExpandedAccordionItems) {
+                setTimeout(() => {
+                    //setExpandedAccordionItems((oldValue) => cacheExpandedAccordionItems)
+                    setExpandedAccordionItems((oldValue) => [...oldValue, ceai])
+                }, 250 * i++)
+            }
+        }
     }, [rows])
 
     /* const handleDbPingResult = (event, result) => {
@@ -1092,7 +1105,6 @@ export default function SearchSample() {
             <Accordion
                 type="multiple"
                 className="w-full mb-4"
-                defaultValue={defaultExposedAccordionItems}
                 value={expandedAccordionItems}
                 collapsible >
                 {rows.map((row) =>
@@ -1157,6 +1169,13 @@ export default function SearchSample() {
                                             className="bg-green-600 mr-2"
                                             onClick={(e) => {
                                                 e.stopPropagation()
+
+                                                // // Store this value so we know which items were expanded
+                                                setCacheExpandedAccordionItems((oldValue) =>
+                                                    expandedAccordionItems
+                                                    //[row.ID]
+                                                )
+
                                                 //const url = "/add-edit-sample/" + row.ID
                                                 const url = "/add-edit-sample/" + row.ID + "?language=" + currentLang
                                                 window.apeye.send("openNewWindow", url)
