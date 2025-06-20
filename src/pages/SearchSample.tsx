@@ -156,7 +156,7 @@ export default function SearchSample() {
         const ipcResponseName = "pleaseTriggerSearch"
         //const ipcRequestName = "tellSearchPageToTriggerSearch"
 
-        console.log("initTriggerSearchAfterAddSample: ==^==^==^==^==^==^==^==")
+        //console.log("initTriggerSearchAfterAddSample: ==^==^==^==^==^==^==^==")
 
         window.apeye.receive(ipcResponseName, (data) => {
 
@@ -164,9 +164,12 @@ export default function SearchSample() {
 
             // // Trigger a new search
             setTriggerSearch((oldValue) => oldValue + 1)
+
+            // // Listen for future events
+            initTriggerSearchAfterAddSample()
         });
 
-        console.log("initTriggerSearchAfterAddSample: ==^==^==^==^==^==^==^==")
+        //console.log("initTriggerSearchAfterAddSample: ==^==^==^==^==^==^==^==")
 
         // // In this case, we don't send any request
         //window.apeye.send(ipcRequestName, {})
@@ -986,206 +989,6 @@ export default function SearchSample() {
                         </div>
                     </div>
 
-                    {/* END : item code search row */}
-
-                    <div className="col-span-full">
-                        <div className="flex flex-rows justify-end w-full gap-2">
-                            <Button
-                                id="search"
-                                className="bg-blue-600"
-                                onClick={(e) => {
-                                    setPage(1)
-                                    search(e)
-                                }}
-                            >{t("search")}</Button>
-                            <Button
-                                id="clear-search"
-                                variant="outline"
-                                className="text-orange-500 border-orange-500"
-                                onClick={clearSearch}
-                            >{t("clearAllSearchConditions")}</Button>
-                        </div>
-                    </div>
-
-
-                </div>
-
-                {/* </div> */}
-
-            {/* <pre>
-        {(rows && JSON.stringify(rows, null, 2)) ||
-            'No query results yet!'}
-    </pre> */}
-
-            <div className="flex flex-row justify-start gap-x-8 p-2 mt-4 mb-2">
-                <div>{page}/{pageCount} {t("page")}</div><div>{t("total_n_records", { record_count: recordCount })}</div>
-            </div>
-
-            <div className="w-full grid grid-cols-9 justify-between justify-items-start gap-2 p-4 mb-2 border border-gray-400 rounded-sm text-sm">
-                <div className="col-span-1">{t("picture")}</div>
-                <div
-                    className={cn(
-                        "col-span-2 cursor-pointer flex flex-row",
-                        (orderBy == "PRODUCT_NO") && "text-blue-700 font-bold"
-                    )}
-                    onClick={(e) => refreshWithNewOrder(e, "PRODUCT_NO")}>
-                    {(orderBy == "PRODUCT_NO") ? (orderAscDesc ? <ArrowDownWideNarrow /> : <ArrowUpNarrowWide />) : "" }
-                    {t("productNo")}
-                </div>
-                <div
-                    className={cn(
-                        "col-span-2 cursor-pointer flex flex-row",
-                        (orderBy == "DRAWING_NO") && "text-blue-700 font-bold"
-                    )}
-                    onClick={(e) => refreshWithNewOrder(e, "DRAWING_NO")}>
-                    {(orderBy == "DRAWING_NO") ? (orderAscDesc ? <ArrowDownWideNarrow /> : <ArrowUpNarrowWide />) : ""}
-                    {t("drawingNo")}
-                </div>
-                <div
-                    className={cn(
-                        "col-span-1 cursor-pointer justify-self-end flex flex-row",
-                        (orderBy == "UNIT_PRICE") && "text-blue-700 font-bold"
-                    )}
-                    onClick={(e) => refreshWithNewOrder(e, "UNIT_PRICE")}>
-                    {(orderBy == "UNIT_PRICE") ? (orderAscDesc ? <ArrowDownWideNarrow /> : <ArrowUpNarrowWide />) : ""}
-                    {t("unitPrice")}</div>
-                <div
-                    className={cn(
-                        "col-span-1 cursor-pointer justify-self-end flex flex-row pr-3",
-                        (orderBy == "MATERIAL") && "text-blue-700 font-bold"
-                    )}
-                    onClick={(e) => refreshWithNewOrder(e, "MATERIAL")}>
-                    {(orderBy == "MATERIAL") ? (orderAscDesc ? <ArrowDownWideNarrow /> : <ArrowUpNarrowWide />) : ""}
-                    {t("material")}</div>
-                <div
-                    className={cn(
-                        "col-span-1 cursor-pointer justify-self-end flex flex-row",
-                        (orderBy == "SAMPLE_DATE") && "text-blue-700 font-bold"
-                    )}
-                    onClick={(e) => refreshWithNewOrder(e, "SAMPLE_DATE")}>
-                    {(orderBy == "SAMPLE_DATE") ? (orderAscDesc ? <ArrowDownWideNarrow /> : <ArrowUpNarrowWide />) : ""}
-                    <div className="w-[7rem]">
-                        {t("moldOpeningDate")}
-                    </div></div>
-                <div
-                    className={cn(
-                        "col-span-1 cursor-pointer justify-self-end flex flex-row",
-                        (orderBy == "MOLD_RELEASE_DATE") && "text-blue-700 font-bold"
-                    )}
-                    onClick={(e) => refreshWithNewOrder(e, "MOLD_RELEASE_DATE")}>
-                    {(orderBy == "MOLD_RELEASE_DATE") ? (orderAscDesc ? <ArrowDownWideNarrow /> : <ArrowUpNarrowWide />) : ""}
-                    <div className="w-[7rem]">
-                        {t("massProductionDate")}
-                    </div></div>
-            </div>
-
-            {/* onValueChange={fetchItemCodes} */}
-            <Accordion
-                type="multiple"
-                className="w-full mb-4"
-                value={expandedAccordionItems}
-                collapsible >
-                {rows.map((row) =>
-                    <AccordionItem key={row.ID} value={row.ID} className="p-4 mb-6 last:mb-0 border-0 bg-gray-200 dark:bg-gray-800">
-                        <AccordionHeader>
-                            <div className="w-full grid grid-cols-9 justify-between justify-items-start gap-2">
-                                <div className="col-span-1">
-                                    <img className="h-[64px]" src={row.eemage} />
-                                </div>
-                                <div className="col-span-2">{row.PRODUCT_NO} </div>
-                                <div className="col-span-2">{row.DRAWING_NO} </div>
-                                <div className="col-span-1 justify-self-end">{row.UNIT_PRICE} </div>
-                                <div className="col-span-1 justify-self-end">{row.MATERIAL} </div>
-                                <div className="col-span-1 justify-self-end">{(row.SAMPLE_DATE).replaceAll("-", "/")} </div>
-                                <div className="col-span-1 justify-self-end">{(row.MOLD_RELEASE_DATE).replaceAll("-", "/")} </div>
-                                <div className="col-span-5">
-                                    <Button
-                                        data-slot="accordion-trigger"
-                                        className="w-[148px] bg-blue-600 mr-2"
-                                        onClick={() => trackClickedAccordionItems(row.ID)}
-                                    >{expandedAccordionItems.includes(row.ID) ? t("hide") : t("check")} item code</Button>
-
-                                    {/* <Button asChild
-                                    className="bg-green-600 mr-2">
-                                    <Link
-                                        to="/view-sample/$id"
-                                        params={{ id: row.ID }}
-                                        target="_blank" >{t("view")}</Link>
-                                </Button> */}
-
-                                    <Button
-                                        className="bg-green-600 mr-2"
-                                        onClick={(e) => {
-                                            //e.preventDefault()
-                                            e.stopPropagation()
-
-                                            //e.value = row.ID
-                                            //viewSample(e)
-
-                                            //const url = "/view-sample/" + row.ID
-                                            const url = "/view-sample/" + row.ID + "?language=" + currentLang
-
-                                            // // Open new window. The window containsa broken application however :(
-                                            //window.open(url)
-
-                                            //navigate({ to: url })
-
-                                            window.apeye.send("openNewWindow", url)
-                                        }}
-                                    >{t("view")}</Button>
-
-                                    {/* <Button asChild
-                                    className="bg-green-600 mr-2">
-                                        <Link
-                                            to="/add-edit-sample/$id"
-                                            params={{ id: row.ID }}
-                                        >{t("edit")}</Link>
-                                </Button> */}
-
-                                    {(writable == true) &&
-                                        <Button
-                                            className="bg-green-600 mr-2"
-                                            onClick={(e) => {
-                                                e.stopPropagation()
-                                                //const url = "/add-edit-sample/" + row.ID
-                                                const url = "/add-edit-sample/" + row.ID + "?language=" + currentLang
-                                                window.apeye.send("openNewWindow", url)
-                                            }}
-                                        >{t("edit")}</Button>
-                                    }
-
-                                    {/* <Button
-                                variant="outline"
-                                className="text-orange-500 border-orange-500"
-                                onClick={(e) => {
-                                    e.value = row.ID
-                                    deleteSample(e)
-                                }}
-                            >{t("delete")}</Button> */}
-
-                                    {(writable == true) &&
-                                        <Dialog>
-                                            <DialogTrigger asChild>
-                                                <Button
-                                                    className="bg-red-600"
-                                                    onClick={(e) => {
-                                                        e.stopPropagation()
-                                                        //e.value = itemCode.ID
-                                                        //deleteItemCode(e)
-                                                    }}
-                                                >{t("delete")}</Button>
-                                            </DialogTrigger>
-                                            <DialogContent className="sm:max-w-sm p-6">
-                                                <DialogHeader>
-                                                    <DialogTitle>{t('deleteItemCode')}</DialogTitle>
-                                                    {/* <DialogDescription>
-                                        Anyone who has this link will be able to view this.
-                                    </DialogDescription> */}
-                                                </DialogHeader>
-                                                <div className="w-full grid grid-cols-1 justify-items-start gap-6">
-                                                    <div>{t('areYouSure')}</div>
-                                                </div>
-                                                <DialogFooter className="sm:justify-start">
                                                     <DialogClose asChild>
                                                         <Button
                                                             className="bg-red-600"
