@@ -326,7 +326,7 @@ export default function AddEditViewSample() {
 
         const queryItemCodes = "SELECT * FROM item_codes "
             + "WHERE SAMPLE_ID = ? "
-            + "ORDER BY CONFIRMATION_DATE"
+            //+ "ORDER BY CONFIRMATION_DATE"
 
         const values = [actualId]
 
@@ -678,7 +678,7 @@ export default function AddEditViewSample() {
 
             } else {
                 // // Append the object locally
-                updatedItemCodes = [updatedItemCode, ...rows]
+                updatedItemCodes = [...rows, updatedItemCode]
 
                 console.log("saveItemCode: appended new item code locally")
 
