@@ -761,7 +761,7 @@ export default function SearchSample() {
                     {(writable == true) &&
                         <div className="text-right">
                             <Button
-                                className="bg-green-600 mr-1 mb-1"
+                                className="bg-green-600 mr-1"
                                 onClick={(e) => {
                                     e.stopPropagation()
                                     //const url = "/add-edit-sample""
