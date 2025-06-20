@@ -1,4 +1,4 @@
-﻿import React from "react"
+import React from "react"
 import { useNavigate, useLocation, useParams, useRouter } from "@tanstack/react-router"
 import {
     Accordion,
@@ -1077,27 +1077,27 @@ export default function AddEditViewSample() {
                 <Label className="text-lg" >{t("sampleDate")}</Label>
                 {writable ?
                     <div className="relative">
-                    <Popover>
-                        <PopoverTrigger asChild>
-                            <Button
-                                variant={"outline"}
-                                className={cn(
+                        <Popover>
+                            <PopoverTrigger asChild>
+                                <Button
+                                    variant={"outline"}
+                                    className={cn(
                                         "w-full justify-start text-left font-normal",
-                                    !sampleDate && "text-muted-foreground"
-                                )}
-                            >
-                                <CalendarIcon />
-                                {sampleDate ? format(sampleDate, "yyyy/MM/dd") : <span>{t("sampleDate")}</span>}
-                            </Button>
-                        </PopoverTrigger>
-                        <PopoverContent className="w-auto p-0" align="start">
-                            <Calendar
-                                mode="single"
-                                selected={sampleDate}
-                                onSelect={(e) => setSampleDate(e)}
-                            />{/* onSelect={setSampleDate} */}
-                        </PopoverContent>
-                    </Popover>
+                                        !sampleDate && "text-muted-foreground"
+                                    )}
+                                >
+                                    <CalendarIcon />
+                                    {sampleDate ? format(sampleDate, "yyyy/MM/dd") : <span>{t("sampleDate")}</span>}
+                                </Button>
+                            </PopoverTrigger>
+                            <PopoverContent className="w-auto p-0" align="start">
+                                <Calendar
+                                    mode="single"
+                                    selected={sampleDate}
+                                    onSelect={(e) => setSampleDate(e)}
+                                />{/* onSelect={setSampleDate} */}
+                            </PopoverContent>
+                        </Popover>
                         <div className="absolute right-3 top-3/5 transform -translate-y-3/5">
                             <CircleX className="text-gray-300 cursor-pointer" size={18} onClick={() => setSampleDate(null)} />
                         </div>
@@ -1111,21 +1111,21 @@ export default function AddEditViewSample() {
                 <Label className="text-lg" >{t("moldReleaseDate")} </Label>
                 {writable ?
                     <div className="relative">
-                    <Popover>
-                        <PopoverTrigger asChild>
-                            <Button
-                                variant={"outline"}
-                                className={cn(
+                        <Popover>
+                            <PopoverTrigger asChild>
+                                <Button
+                                    variant={"outline"}
+                                    className={cn(
                                         "w-full justify-start text-left font-normal",
-                                    !moldReleaseDate && "text-muted-foreground"
-                                )}
-                            >
-                                <CalendarIcon />
-                                {moldReleaseDate ? format(moldReleaseDate, "yyyy/MM/dd") : <span>{t("moldReleaseDate")}</span>}
-                            </Button>
-                        </PopoverTrigger>
-                        <PopoverContent className="w-auto p-0" align="start">
-                            <Calendar
+                                        !moldReleaseDate && "text-muted-foreground"
+                                    )}
+                                >
+                                    <CalendarIcon />
+                                    {moldReleaseDate ? format(moldReleaseDate, "yyyy/MM/dd") : <span>{t("moldReleaseDate")}</span>}
+                                </Button>
+                            </PopoverTrigger>
+                            <PopoverContent className="w-auto p-0" align="start">
+                                <Calendar
                                     mode="single"
                                     selected={moldReleaseDate}
                                     onSelect={(e) => {
@@ -1133,9 +1133,9 @@ export default function AddEditViewSample() {
                                         //setMoldReleaseDate(e.value)
                                         setMoldReleaseDate(e)
                                     }}
-                            />{/* onSelect={setMoldReleaseDate} */}
-                        </PopoverContent>
-                    </Popover>
+                                />{/* onSelect={setMoldReleaseDate} */}
+                            </PopoverContent>
+                        </Popover>
                         <div className="absolute right-3 top-3/5 transform -translate-y-3/5">
                             <CircleX className="text-gray-300 cursor-pointer" size={18} onClick={() => setMoldReleaseDate(null)} />
                         </div>
