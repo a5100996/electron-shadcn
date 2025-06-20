@@ -82,6 +82,7 @@ export default function SearchSample() {
     const [orderBy, setOrderBy] = React.useState("PRODUCT_NO")
     const [orderAscDesc, setOrderAscDesc] = React.useState(1)
 
+    const [defaultExposedAccordionItems, setDefaultExposedAccordionItems] = React.useState([])
     const [expandedAccordionItems, setExpandedAccordionItems] = React.useState([])
 
     //const { ipcRenderer } = window.require('electron')
@@ -212,6 +213,11 @@ export default function SearchSample() {
 
     // // trigger a search for samples
     React.useEffect(() => {
+
+        // // store already expanded accordion items
+        setDefaultExposedAccordionItems((oldValue) =>
+            expandedAccordionItems)
+
         search(new CustomEvent("search", {}))
     }, [triggerSearch])
 
@@ -636,9 +642,6 @@ export default function SearchSample() {
 
             // // Remove from list of open accordion items
             setExpandedAccordionItems((oldValue) => shallow_copy)
-
-            console.log('trackClickedAccordionItems: 030 expandedAccordionItems = ', expandedAccordionItems)
-
         } else {
 
             console.log('trackClickedAccordionItems: 110')
@@ -647,12 +650,15 @@ export default function SearchSample() {
 
                 console.log('trackClickedAccordionItems: 120 existingValue =', existingValue)
 
-                return [...existingValue, row_id]
+                const newValue = [...existingValue, row_id]
+
+                console.log('trackClickedAccordionItems: 130 newValue =', newValue)
+
+                return newValue
             })
-
-            console.log('trackClickedAccordionItems: 130 expandedAccordionItems = ', expandedAccordionItems)
-
         }
+
+        console.log('trackClickedAccordionItems: 200 expandedAccordionItems = ', expandedAccordionItems)
 
         return true
     }
@@ -1086,6 +1092,7 @@ export default function SearchSample() {
             <Accordion
                 type="multiple"
                 className="w-full mb-4"
+                defaultValue={defaultExposedAccordionItems}
                 value={expandedAccordionItems}
                 collapsible >
                 {rows.map((row) =>
