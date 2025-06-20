@@ -710,6 +710,12 @@ export default function AddEditViewSample() {
             setRows(existingValue => {
                 return existingValue.filter(ev => ev.ID !== event.value)
             })
+
+            // // inform user
+            // toast.success(t("record_saved"))
+
+            // // tell search page to refresh its list
+            tellSearchPageToTriggerSearch()
         })
 
         window.apeye.send(ipcRequestName, params)
