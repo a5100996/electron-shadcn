@@ -660,6 +660,9 @@ export default function AddEditViewSample() {
             // // inform user
             toast.success(t("record_saved"))
 
+            // // tell search page to refresh its list
+            tellSearchPageToTriggerSearch()
+
             // // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
             // resetItemCodeFormFields()
@@ -908,14 +911,14 @@ export default function AddEditViewSample() {
                                         />
                                     </div>
 
-                                    <div className="relative flex flex-col gap-2">
+                                    <div className="relative flex flex-col gap-2 w-full">
                                         <Label>{t("opening_confirmation_date")}</Label>
                                         <Popover modal={true}>
                                             <PopoverTrigger asChild>
                                                 <Button
                                                     variant={"outline"}
                                                     className={cn(
-                                                        "w-full justify-start text-left font-normal",
+                                                        "justify-start text-left font-normal",
                                                         !itemCodeConfirmationDate && "text-muted-foreground"
                                                     )}
                                                 >
@@ -1358,7 +1361,7 @@ export default function AddEditViewSample() {
                                                                 <Button
                                                                     variant={"outline"}
                                                                     className={cn(
-                                                                        "w-full justify-start text-left font-normal",
+                                                                        "justify-start text-left font-normal",
                                                                         !itemCodeConfirmationDate && "text-muted-foreground"
                                                                     )}
                                                                 >
