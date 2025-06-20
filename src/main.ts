@@ -781,7 +781,7 @@ app.whenReady().then(() => {
                             color_code: cat.color_code,
                             // // Since JavaScript Date object is not supported by sqlite3,
                             // // the front end had converted the following to "yyyy-MM-dd"
-                            confirmation_date: cat.confirmation_date,
+                            confirmation_date: cat.confirmation_date ? cat.confirmation_date : "",
                             //confirmation_date: cat.confirmation_date ? format(cat.confirmation_date, "yyyy-MM-dd") : "",
                             remark: cat.remark,
                         }
@@ -798,7 +798,7 @@ app.whenReady().then(() => {
                         SAMPLE_ID: cat.sample_id,
                         NAME: cat.name,
                         COLOR_CODE: cat.color_code,
-                        CONFIRMATION_DATE: cat.confirmation_date.replaceAll("-", "/"),
+                        CONFIRMATION_DATE: cat.confirmation_date ? cat.confirmation_date.replaceAll("-", "/") : "",
                         REMARK: cat.remark,
                     })
 
